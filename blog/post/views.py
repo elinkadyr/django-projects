@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 from .models import Post
 
 # Create your views here.
@@ -10,9 +11,10 @@ def posts_list(request):
 
 
 "REST"
+from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.shortcuts import get_object_or_404 
+
 from .models import Post
 from .serializers import PostSerializer
 

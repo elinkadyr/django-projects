@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     # libs
     'rest_framework',
     'rest_framework_simplejwt',
+    'drf_yasg',
+
 
     # apps
     'post', 
@@ -142,4 +144,14 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
+}
+
+SWAGGER_SETTINGS = {    
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
 }

@@ -1,6 +1,9 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Post
+
 from review.serializers import CommentSerializer
+
+from .models import Post
+
 
 class PostSerializer(ModelSerializer):
     class Meta:
@@ -14,4 +17,3 @@ class PostSerializer(ModelSerializer):
         rep['comments'] = CommentSerializer(comments, many=True).data
         return rep
       
-    

@@ -16,19 +16,31 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from post.views import posts_list, posts_list_api_view, post_details, create_post, delete_post, update_post
-from review.views import toggle_like, CreateCommentAPIView, UpdateCommentAPIView, DeleteCommentAPIView
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework_simplejwt.views import (TokenObtainPairView,
+                                            TokenRefreshView)
+
 from account.views import RegisterUserAPIView
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
+from post.views import (create_post, delete_post, post_details, posts_list,
+                        posts_list_api_view, update_post)
+from review.views import (CreateCommentAPIView, DeleteCommentAPIView,
+                          UpdateCommentAPIView, toggle_like)
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Python 27 API",
+        description="makers bootcamp",
+        default_version="v1",
+    ),
+    public=True
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('listing/', posts_list),
     path('api/listing/', posts_list_api_view),
-    path('api/details/<int:id>', post_details),
+    path('api/details/<int:id>/', post_details),
     path('api/create/', create_post),
     path('api/delete/<int:id>/', delete_post),
     path('api/update/<int:id>/', update_post),
@@ -39,5 +51,6 @@ urlpatterns = [
     path('api/comment/create/', CreateCommentAPIView.as_view()),
     path('api/comment/update/<int:pk>/', UpdateCommentAPIView.as_view()),
     path('api/comment/delete/<int:pk>/', DeleteCommentAPIView.as_view()),
+    path('docs/', schema_view.with_ui('swagger')),
 ]
 

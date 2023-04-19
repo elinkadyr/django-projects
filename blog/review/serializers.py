@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+
 from .models import Comment
 
 class CommentSerializer(ModelSerializer):
@@ -11,3 +12,4 @@ class CommentSerializer(ModelSerializer):
         request = self.context.get('request')
         attrs['user'] = request.user
         return attrs
+    

@@ -1,5 +1,5 @@
-from rest_framework.serializers import ModelSerializer, CharField, ValidationError
 from django.contrib.auth import get_user_model
+from rest_framework.serializers import (CharField, ModelSerializer, ValidationError)
 
 User = get_user_model()
 
@@ -20,3 +20,4 @@ class RegisterUserSerializer(ModelSerializer):
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
+
